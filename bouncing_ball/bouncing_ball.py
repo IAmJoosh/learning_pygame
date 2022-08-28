@@ -6,7 +6,7 @@ pygame.init()
 
 width, height = 320, 240
 size = width, height
-speed = [0.1, 0.1]
+speed = [1, 1]
 black = 0, 0, 0
 
 # Create window
