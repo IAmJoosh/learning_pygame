@@ -28,6 +28,7 @@ while 1:
     for event in pygame.event.get():
         # If user input is clicking the X
         if event.type == pygame.QUIT:
+            pygame.quit()
             sys.exit()
     
     # Move ball
