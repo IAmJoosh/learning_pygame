@@ -4,7 +4,7 @@ import pygame
 # Initialises modules from pygame
 pygame.init()
 
-WIDTH, HEIGHT = 320, 240
+WIDTH, HEIGHT = 1200, 800
 SIZE = WIDTH, HEIGHT
 SPEED = [1, 1]
 BLACK = 0, 0, 0
@@ -13,6 +13,7 @@ BLACK = 0, 0, 0
 # Pygame represents images as Surface objects
 # set_mode() creates new Surface that represents actual displayed graphics
 screen = pygame.display.set_mode(SIZE)
+pygame.display.set_caption("Bouncing Ball")
 
 # Load image
 # Supports bmp, jpg, png, tga, and gif
