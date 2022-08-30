@@ -1,5 +1,6 @@
 import sys
 import pygame
+from objects import Ball, Paddle
 
 pygame.init()
 
@@ -8,6 +9,7 @@ BG_COLOUR = pygame.Color("black")
 WIDTH, HEIGHT = 1200, 800
 SCREEN_SIZE = WIDTH, HEIGHT
 BALL_SPEED = [-2, 2]
+PADDLE_SPEED = 0
 BORDER_WIDTH = PADDLE_WIDTH = 25
 PADDLE_LENGTH = (HEIGHT - 2 * BORDER_WIDTH) * 0.25
 BALL_RADIUS = 30
@@ -17,18 +19,10 @@ screen = pygame.display.set_mode(SCREEN_SIZE)
 pygame.display.set_caption("Squash Pong")
 screen.fill(BG_COLOUR)
 
-ball = pygame.draw.circle(screen, 
-                            FG_COLOUR, (
-                            WIDTH - PADDING - PADDLE_WIDTH - BALL_RADIUS, 
-                            HEIGHT/2), 
-                            BALL_RADIUS)
-
-paddle = pygame.draw.rect(screen,
-                            FG_COLOUR,
-                            (WIDTH - PADDLE_WIDTH - PADDING,
-                            HEIGHT/2 - PADDLE_LENGTH/2,
-                            PADDLE_WIDTH,
-                            PADDLE_LENGTH))
+ball = Ball(WIDTH - PADDING - PADDLE_WIDTH - BALL_RADIUS, HEIGHT / 2, BALL_RADIUS, BALL_SPEED, FG_COLOUR)
+ball.show(screen, FG_COLOUR)
+# paddle = Paddle(WIDTH - PADDLE_WIDTH - PADDING, HEIGHT/2 - PADDLE_LENGTH/2, PADDLE_WIDTH, PADDLE_LENGTH, PADDLE_SPEED, FG_COLOUR)
+# paddle.show(screen, FG_COLOUR)
 
 pygame.draw.rect(screen,
                     FG_COLOUR,
@@ -48,12 +42,11 @@ while True:
             pygame.quit()
             sys.exit()
     
-    ball = ball.move(BALL_SPEED)
-    if ball.left < BORDER_WIDTH or ball.right > WIDTH:
-        BALL_SPEED[0] = -BALL_SPEED[0]
-    if ball.top < BORDER_WIDTH or ball.bottom > (HEIGHT - BORDER_WIDTH):
-        BALL_SPEED[1] = -BALL_SPEED[1]
-    
-    screen.fill(BG_COLOUR)
-    screen.blit(ball, ball_rect)
+    # if (ball.x - ball.radius) < BORDER_WIDTH or (ball.x + ball.radius) > (WIDTH):
+    #     ball.speed[0] = -ball.speed[0]
+    # if (ball.y - ball.radius) < BORDER_WIDTH or (ball.y + ball.radius) > (HEIGHT - BORDER_WIDTH):
+    #     ball.speed[1] = -ball.speed[1]
+
+    ball.update(screen, BG_COLOUR)
+
     pygame.display.flip()
